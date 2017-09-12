@@ -58,7 +58,7 @@ str;
 
         $path = str_replace('\\', '/', $path);
 
-        //定义框架的url
+        //定义框架的url,也即是外部路径
         define('__APP__', $path);
         define('__ROOT__', dirname(__APP__));
 
@@ -78,14 +78,18 @@ str;
 
     }
 
+    /**
+     * 自动创建一个控制器
+     */
     private static function _create_demo(){
         $path =  APP_CONTROLLER_PATH . DS .'IndexController.class.php';
 
         $str = <<<str
 <?php
-class IndexController{
+class IndexController extends Controller{
     public function index(){
-        echo "ok";
+        header("content-type:text/html;charset=utf-8");
+        echo "<h2>欢迎使用YOUNGPHP框架。(:!</h2>";
     }
 }
 
@@ -100,11 +104,15 @@ str;
      * 自动运行控制器
      */
     private static function _app_run(){
+        //通过路由功能获取控制器名称
         $c = isset($_GET[C('VAR_CONTROLLER')]) ? $_GET[C('VAR_CONTROLLER')] : 'Index';
+        //通过路由功能获取控制器方法
         $a = isset($_GET[C('VAR_ACTION')]) ? $_GET[C('VAR_ACTION')] : 'index';
 
         $c .= 'Controller';
+        //实例化控制器
         $obj = new $c();
+        //调用控制器方法
         $obj->$a();
     }
 }

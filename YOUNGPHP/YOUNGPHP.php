@@ -81,11 +81,12 @@ final class YOUNGPHP{
     private static function _import_file(){
         $fileArr = array(
             FUNCTION_PATH . DS .'function.php',
+            CORE_PATH . DS .'Controller.class.php',
             CORE_PATH . DS . 'Application.php'
         );
 
         foreach ($fileArr as $v){
-            require_once $v;
+            require_once($v);
         }
     }
 }
