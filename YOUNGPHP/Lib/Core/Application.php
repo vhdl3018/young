@@ -14,10 +14,8 @@ final class Application{
         self::_set_url();
         //
         spl_autoload_register(array(__CLASS__, '_autoload'));
-
         //
         self::_create_demo();
-
         //
         self::_app_run();
     }
@@ -50,7 +48,7 @@ str;
     }
 
     /**
-     *
+     * 定义框架的url，外部路径。
      */
     private static function _set_url(){
         //p($_SERVER);
@@ -61,7 +59,6 @@ str;
         //定义框架的url,也即是外部路径
         define('__APP__', $path);
         define('__ROOT__', dirname(__APP__));
-
         define('__TPL__', __ROOT__ . DS . APP_NAME . DS .'Tpl');
         define('__PUBLIC__', __TPL__ . DS . 'Public');
 
@@ -112,6 +109,7 @@ str;
         $c .= 'Controller';
         //实例化控制器
         $obj = new $c();
+
         //调用控制器方法
         $obj->$a();
     }

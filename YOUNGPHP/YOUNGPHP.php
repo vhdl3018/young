@@ -5,9 +5,12 @@
  * Date: 2017/9/12
  * Time: 10:07
  */
+
+/**
+ * Class YOUNGPHP  框架单一入口文件
+ */
 final class YOUNGPHP{
     public static function run(){
-
         //定义网站框架目录，以及相关APP开发目录
         self::_set_const();
         //自动创建网站应用目录
@@ -73,6 +76,13 @@ final class YOUNGPHP{
                 mkdir($v, 0777, true);
             }
         }
+
+        //将需要的公共模板，复制到网站的应用目录。
+        is_file(APP_TPL_PATH . DS . 'success.html') || copy(DATA_PATH . DS . 'Tpl/success.html' , APP_TPL_PATH . DS . 'success.html');
+        is_file(APP_TPL_PATH . DS . 'error.html') || copy(DATA_PATH . DS . 'Tpl/error.html' , APP_TPL_PATH . DS . 'error.html');
+
+
+
     }
 
     /**
@@ -86,7 +96,7 @@ final class YOUNGPHP{
         );
 
         foreach ($fileArr as $v){
-            require_once($v);
+            require_once $v;
         }
     }
 }
