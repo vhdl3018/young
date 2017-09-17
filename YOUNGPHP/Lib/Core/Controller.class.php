@@ -16,6 +16,10 @@ class Controller{
         if(method_exists($this, '__init')){
             $this->__init();
         }
+
+        if(method_exists($this, '__auto')){
+            $this->__auto();
+        }
     }
     /**
      * 操作成功进行下一步操作。
