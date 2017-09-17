@@ -10,9 +10,13 @@
  * @param $arr  需要格式化打印的数据
  */
 function p($arr){
-    echo '<pre>';
-    print_r($arr);
-    echo '</pre>';
+    if(is_bool($arr)){
+        var_dump($arr);
+    }elseif(is_null($arr)){
+        var_dump($arr);
+    }else{
+        echo '<pre style="padding:10px;border-radius: 5px;background: #f5f5f5;border: 1px solid #ccc;font-size: 14px;">' . print_r($arr,true) .'</pre>';
+    }
 }
 
 //1.加载配置项
@@ -48,8 +52,67 @@ function C($var=null, $value=null){
     if(is_null($var) && is_null($value)){
         return $config;
     }
-
-
-
-
 }
+
+/**
+ * 跳转页面函数
+ * @param $url
+ * @param int $time
+ * @param string $msg
+ */
+function go($url, $time=0, $msg=''){
+    //headers_sent  检测HTTP头是否已经发送
+    if(!headers_sent()){
+        $time == 0 ? header('Location' . $url) : header("Refresh:{$time};url={$url}");
+        die($msg);
+    }else{
+        //http头已经发送，刚通过meta方式进行页面跳转。
+        echo "<meta http-equiv='refresh' content='{$time}';url={$url} />";
+        if($time) die($msg);
+    }
+}
+
+/**
+ * 框架错误日志打印功能
+ * @param $error
+ * @param string $level
+ * @param int $type
+ * @param null $dest
+ */
+function halt($error, $level='error', $type=3, $dest=null){
+    if(is_array($error)){
+        Log::write($error['message'], $level, $type, $dest);
+    }else{
+        Log::write($error, $level, $type, $dest);
+    }
+
+    //将错误信息，按照格式进行整理
+    $e = array();
+    if(DEBUG){
+        if(!is_array($error)){
+            $trace = debug_backtrace();
+            $e['message'] = $error;
+            $e['file']    = $trace[0]['file'];
+            $e['line']    = $trace[0]['line'];
+            $e['class']   = isset($trace[0]['class']) ? $trace[0]['class'] : '';
+            $e['function']   = isset($trace[0]['function']) ? $trace[0]['function'] : '';
+
+            //开启缓存
+            ob_start();
+            debug_print_backtrace();
+            $e['trace'] = htmlspecialchars(ob_get_clean());
+        }else{
+            $e = $error;
+        }
+    }else{
+        if($url = C('ERROR_URL')){
+            go($url);
+        }else{
+            $e['message'] = C('ERROR_MSG');
+        }
+    }
+
+    include DATA_PATH . DS . 'Tpl/halt.html';
+    die;
+}
+?>

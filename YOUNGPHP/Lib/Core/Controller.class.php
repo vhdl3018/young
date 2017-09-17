@@ -11,7 +11,7 @@
  */
 class Controller{
     public function __construct(){
-        echo "父类本身的初始化过程";
+        //echo "父类本身的初始化过程";
         //给父类增加一个本类的初始化方法
         if(method_exists($this, '__init')){
             $this->__init();
@@ -44,3 +44,5 @@ class Controller{
     }
 
 }
+
+?>
