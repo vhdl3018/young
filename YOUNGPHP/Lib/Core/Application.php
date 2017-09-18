@@ -106,6 +106,11 @@ str;
         //通过路由功能获取控制器方法
         $a = isset($_GET[C('VAR_ACTION')]) ? $_GET[C('VAR_ACTION')] : 'index';
 
+        //将默认的控制器和方法，设置为动态的常量
+        define('CONTROLLER', $c);
+        define('ACTION', $a);
+        
+
         $c .= 'Controller';
         //实例化控制器
         $obj = new $c();

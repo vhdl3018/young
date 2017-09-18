@@ -4,8 +4,15 @@ class IndexController extends Controller{
         //echo "子类本身的初始化过程";
     }
     public function index(){
-       halt(array('message'=> "出错了",
-                  'url'    => 'http:www.baidu.com'
-       ));
+
+        $ispost = $_SERVER['REQUEST_METHOD'] == 'post' ? true : false;
+        p($ispost);
+
+        if (IS_POST){
+            $username = $_POST['username'];
+            p($username);
+        }
+
+        $this->display();
     }
 }

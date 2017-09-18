@@ -23,7 +23,7 @@ class Log{
            $dest = LOG_PATH . DS . date('Y_m_d') . '.log';
         }
         //日志路径存在，则把日志存放到对应的目录中去。
-        if(is_dir(LOG_PATH)) error_log("[TIME]".date('y-m-g H:i:s') . "{$level}:" .$msg."\r\n",  $type, $dest);
+        if(is_dir(LOG_PATH)) error_log("[TIME]".date('y-m-d H:i:s') . "{$level}:" .$msg."\r\n",  $type, $dest);
     }
 
 

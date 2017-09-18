@@ -115,4 +115,43 @@ function halt($error, $level='error', $type=3, $dest=null){
     include DATA_PATH . DS . 'Tpl/halt.html';
     die;
 }
+
+/**
+ *打印用户自定义的常量
+ */
+function print_const(){
+    $const = get_defined_constants(true);
+    p($const['user']);
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

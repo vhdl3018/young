@@ -22,7 +22,7 @@ class Log{
            $dest = LOG_PATH . DS . date('Y_m_d') . '.log';
         }
         //日志路径存在，则把日志存放到对应的目录中去。
-        if(is_dir(LOG_PATH)) error_log("[TIME]".date('y-m-g H:i:s') . "{$level}:" .$msg."\r\n",  $type, $dest);
+        if(is_dir(LOG_PATH)) error_log("[TIME]".date('y-m-d H:i:s') . "{$level}:" .$msg."\r\n",  $type, $dest);
     }
 
 
@@ -141,6 +141,15 @@ function halt($error, $level='error', $type=3, $dest=null){
 
     include DATA_PATH . DS . 'Tpl/halt.html';
     die;
+}
+
+/**
+ *打印用户自定义的常量
+ */
+function print_const(){
+    $const = get_defined_constants(true);
+    p($const['user']);
+    
 }/**
  * Created by PhpStorm.
  * User: qsqxj
@@ -152,6 +161,7 @@ function halt($error, $level='error', $type=3, $dest=null){
  * Class Controller  控制器父类
  */
 class Controller{
+    protected $var = array();
     public function __construct(){
         //echo "父类本身的初始化过程";
         //给父类增加一个本类的初始化方法
@@ -183,6 +193,37 @@ class Controller{
     protected function error($msg, $url=null, $time=3){
         $url = $url ? "window.location.href='" . $url . "'" : 'window.location.history.back(-1)';
         include APP_TPL_PATH . DS . 'error.html';
+    }
+
+    /**
+     * 载入模板函数
+     * @param null $tpl
+     */
+    protected function display($tpl=null){
+        //默认自动载入当前操作方法对应的模板
+        if(is_null($tpl)){
+            //如果为空，则自动加载当前应用模板目录中对应的方法名模板
+            $path = APP_TPL_PATH .DS . CONTROLLER . DS .ACTION . '.html';
+        }else{
+            $suffix = strrchr($tpl, '.');
+            $tpl = empty($suffix) ? $tpl.'.html' : $tpl;
+            $path = APP_TPL_PATH . DS . CONTROLLER . DS . $tpl;
+        }
+
+        if (!is_file($path)) halt($path . "模板文件不存在！") ;
+        //将模板数组数据，分解成关联数组对的变量和值。
+        extract($this->var);
+        //载入当前模板文件
+        include $path;
+    }
+
+    /**
+     * 为模板分配显示数据
+     * @param $var
+     * @param $value
+     */
+    protected function assign($var, $value){
+        $this->var[$var] = $value;
     }
 
 }/**
@@ -290,6 +331,11 @@ str;
         $c = isset($_GET[C('VAR_CONTROLLER')]) ? $_GET[C('VAR_CONTROLLER')] : 'Index';
         //通过路由功能获取控制器方法
         $a = isset($_GET[C('VAR_ACTION')]) ? $_GET[C('VAR_ACTION')] : 'index';
+
+        //将默认的控制器和方法，设置为动态的常量
+        define('CONTROLLER', $c);
+        define('ACTION', $a);
+        
 
         $c .= 'Controller';
         //实例化控制器

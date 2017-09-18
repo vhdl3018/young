@@ -6,5 +6,6 @@
  * Time: 10:27
  */
 
+define('DEBUG', true);
 define('APP_NAME', 'Admin');
 require "./YOUNGPHP/YOUNGPHP.php";

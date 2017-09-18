@@ -69,6 +69,9 @@ final class YOUNGPHP{
         define('APP_TPL_PATH', APP_PATH . DS .'Tpl');
         define('APP_PUBLIC_PATH', APP_TPL_PATH . DS .'Public');
 
+        //判断数据的传输方式
+        
+        define("IS_POST", $_SERVER['REQUEST_METHOD'] == 'post' ? true :false);
     }
 
     /**
@@ -93,8 +96,10 @@ final class YOUNGPHP{
         }
 
         //将需要的公共模板，复制到网站的应用目录。
-        is_file(APP_TPL_PATH . DS . 'success.html') || copy(DATA_PATH . DS . 'Tpl/success.html' , APP_TPL_PATH . DS . 'success.html');
-        is_file(APP_TPL_PATH . DS . 'error.html') || copy(DATA_PATH . DS . 'Tpl/error.html' , APP_TPL_PATH . DS . 'error.html');
+        is_file(APP_TPL_PATH . DS . 'success.html')
+        || copy(DATA_PATH . DS . 'Tpl/success.html' , APP_TPL_PATH . DS . 'success.html');
+        is_file(APP_TPL_PATH . DS . 'error.html')
+        || copy(DATA_PATH . DS . 'Tpl/error.html' , APP_TPL_PATH . DS . 'error.html');
 
 
 
