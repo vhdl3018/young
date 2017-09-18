@@ -69,9 +69,25 @@ final class YOUNGPHP{
         define('APP_TPL_PATH', APP_PATH . DS .'Tpl');
         define('APP_PUBLIC_PATH', APP_TPL_PATH . DS .'Public');
 
+        //创建公共
+        define('COMMON_PATH', ROOT_PATH . DS . 'Common');
+        //公共配置项目录
+        define('COMMON_CONFIG_PATH', COMMON_PATH . DS .'Config');
+        //公共模型目录
+        define('COMMON_MODEL_PATH', COMMON_PATH . DS .'Model');
+        //公共库目录
+        define('COMMON_LIB_PATH', COMMON_PATH . DS .'Lib');
+
+
+
         //判断数据的传输方式
-        
-        define("IS_POST", $_SERVER['REQUEST_METHOD'] == 'post' ? true :false);
+        define("IS_POST", $_SERVER['REQUEST_METHOD'] == 'POST' ? true :false);
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'){
+            define("IS_AJAX",true);
+        }else{
+            define("IS_AJAX",false);
+        }
+
     }
 
     /**
@@ -80,6 +96,9 @@ final class YOUNGPHP{
     private static function _create_dir(){
         //将需要创建的目录，放到一个数组中去。
         $arr = array(
+            COMMON_CONFIG_PATH,
+            COMMON_MODEL_PATH,
+            COMMON_LIB_PATH,
             APP_PATH,
             APP_CONFIG_PATH,
             APP_CONTROLLER_PATH,

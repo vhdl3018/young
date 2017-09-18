@@ -79,7 +79,7 @@ function go($url, $time=0, $msg=''){
  * @param int $type
  * @param null $dest
  */
-function halt($error, $level='error', $type=3, $dest=null){
+function halt($error, $level='ERROR', $type=3, $dest=null){
     if(is_array($error)){
         Log::write($error['message'], $level, $type, $dest);
     }else{

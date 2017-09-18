@@ -20,10 +20,28 @@ final class Application{
         self::_app_run();
     }
 
+    /**
+     * 配置项加载
+     */
     private static function _init(){
-        //加载配置项
+        //1.加载配置项--框架的配置
         C(include(CONFIG_PATH . DS . 'config.php'));
-        //用户配置项
+
+        //2.加载公共配置项
+        $commonPath = COMMON_CONFIG_PATH . DS . 'config.php';
+        $commonConfig = <<<str
+<?php
+return array(
+    //配置项
+);
+?>
+str;
+        if(!is_file($commonPath)){
+            file_put_contents($commonPath, $commonConfig);
+        }
+        //加载用户的配置项
+        C(include $commonPath);
+        //3.加载用户配置项
         $userPath = APP_CONFIG_PATH . DS .'config.php';
         $userConfig = <<<str
 <?php
@@ -35,6 +53,7 @@ str;
         if(!is_file($userPath)){
             file_put_contents($userPath, $userConfig);
         }
+
         //加载用户的配置项
         C(include $userPath);
         //设置默认时区
