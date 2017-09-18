@@ -13,10 +13,19 @@ final class YOUNGPHP{
     public static function run(){
         //定义网站框架目录，以及相关APP开发目录
         self::_set_const();
-        //自动创建网站应用目录
-        self::_create_dir();
-        //自动载入框架所需的文件
-        self::_import_file();
+        //是否开启调试模式
+        defined('DEBUG') || define('DEBUG', false);
+        if(DEBUG) {
+            //自动创建网站应用目录
+            self::_create_dir();
+            //自动载入框架所需的文件
+            self::_import_file();
+        }else{
+            //不是调试模式，则关闭错误提示
+            error_reporting(0);
+            //引入核心文件整合的单一文件
+            require_once(TEMP_PATH . DS .'~boot.php');
+        }
         Application::run();
         //echo "YOUNGPHP";
     }
@@ -48,6 +57,10 @@ final class YOUNGPHP{
 
         //项目根目录
         define('ROOT_PATH', dirname(YOUNGPHP_PATH));
+        //临时目录
+        define('TEMP_PATH', ROOT_PATH . DS . 'Temp');
+        //日志目录
+        define('LOG_PATH', ROOT_PATH . DS . 'Log');
 
         //应用目录
         define('APP_PATH', ROOT_PATH .DS. APP_NAME);
@@ -68,7 +81,9 @@ final class YOUNGPHP{
             APP_CONFIG_PATH,
             APP_CONTROLLER_PATH,
             APP_TPL_PATH,
-            APP_PUBLIC_PATH
+            APP_PUBLIC_PATH,
+            TEMP_PATH,
+            LOG_PATH
         );
         //循环创建目录
         foreach ($arr as $v){
@@ -90,14 +105,21 @@ final class YOUNGPHP{
      */
     private static function _import_file(){
         $fileArr = array(
+            CORE_PATH . DS .'Log.class.php',
             FUNCTION_PATH . DS .'function.php',
             CORE_PATH . DS .'Controller.class.php',
             CORE_PATH . DS . 'Application.php'
         );
 
+        //将核心的文件内容，写入到一个文件中去
+        $str = '';
         foreach ($fileArr as $v){
+            $str .= trim(substr(file_get_contents($v), 5, -2));
             require_once $v;
         }
+        $str = "<?php\r\n" . $str;
+
+        file_put_contents(TEMP_PATH . DS . '~boot.php', $str) || die('access not allow');
     }
 }
 
