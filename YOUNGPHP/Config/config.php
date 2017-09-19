@@ -19,5 +19,8 @@ return array(
 
     //错误跳转地址
     'ERROR_RUL'             => '',
-    'ERROR_MSG'             => '网站出错了，请稍候再试...'
+    'ERROR_MSG'             => '站出错了，请稍候再试...',
+    //自动加载Common目录下面的文件
+    'AUTO_LOAD_FILE'        => array()
+
 );

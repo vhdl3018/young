@@ -236,6 +236,8 @@ final class Application{
     public static function run(){
         //框架参数相关初始化
         self::_init();
+        //加载用户自动定义的文件（Common目录下的文件）
+        self::_user_import();
         //初始化框架的url路径
         self::_set_url();
         //
@@ -316,7 +318,21 @@ str;
      */
     private static function _autoload($className){
         //echo $className;
-        include APP_CONTROLLER_PATH . DS . $className . ".class.php";
+        switch (true) {
+            //判断是否是控制器--controller
+            case strlen($className)>10 && substr($className, -10) == 'Controller':
+                $path = APP_CONTROLLER_PATH . DS . $className . ".class.php";
+                if(!is_file($path)) halt($path . '控制器未找到。');
+                include $path;
+                break;
+            
+            default:
+                $path = TOOL_PATH . DS . $className . '.class.php';
+                if(!is_file($path)) halt($path . '类未找到。');
+                include $path;
+                break;
+        }
+
 
     }
 
@@ -363,4 +379,18 @@ str;
         //调用控制器方法
         $obj->$a();
     }
+    /**
+     * 加载Common目录中，用户自定义的文件
+     */
+
+    private static function _user_import(){
+        $fileArr = C('AUTO_LOAD_FILE');
+
+        if(is_array($fileArr) && !empty($fileArr)){
+            foreach ($fileArr as $v) {
+                require_once COMMON_LIB_PATH . DS . $v;
+            }
+        }
+    }
+
 }

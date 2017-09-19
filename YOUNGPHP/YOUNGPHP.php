@@ -54,6 +54,14 @@ final class YOUNGPHP{
         define('CORE_PATH', LIB_PATH . '/Core');
         //框架公共函数目录
         define('FUNCTION_PATH', LIB_PATH . '/Function');
+        //框架扩展目录
+        define('EXTENDS_PATH', YOUNGPHP_PATH . DS .'Extends');
+        //框架工具类目录
+        define('TOOL_PATH', EXTENDS_PATH . DS .'Tool');
+        //框架外包目录
+        define('ORG_PATH', EXTENDS_PATH . DS .'org');
+
+
 
         //项目根目录
         define('ROOT_PATH', dirname(YOUNGPHP_PATH));
