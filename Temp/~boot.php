@@ -236,6 +236,7 @@ final class Application{
     public static function run(){
         //框架参数相关初始化
         self::_init();
+        set_error_handler(array(__CLASS__, 'error'));
         //加载用户自动定义的文件（Common目录下的文件）
         self::_user_import();
         //初始化框架的url路径
@@ -322,7 +323,17 @@ str;
             //判断是否是控制器--controller
             case strlen($className)>10 && substr($className, -10) == 'Controller':
                 $path = APP_CONTROLLER_PATH . DS . $className . ".class.php";
-                if(!is_file($path)) halt($path . '控制器未找到。');
+                //判断当前控制器是否存在
+                if(!is_file($path)){
+                    $emptyPath = APP_CONTROLLER_PATH . DS .'EmptyController.class.php';
+                    if(is_file($emptyPath)){
+                        include $emptyPath;
+                        return;
+                    }else{
+                        halt($path . '控制器未找到。');
+                    }
+
+                }
                 include $path;
                 break;
             
@@ -373,11 +384,26 @@ str;
         
 
         $c .= 'Controller';
-        //实例化控制器
-        $obj = new $c();
+        if (class_exists($c)){  //如果调用的控制器类存在，则直接实例化当前控制器类
+            //实例化控制器
+            $obj = new $c();
+            //调用控制器方法
+            if(!method_exists($obj, $a)){
+                if(method_exists($obj, '__empty')){
+                    $obj->__empty();
+                }else{
+                    halt($c . "控制器" . $a . "方法不存在！");
+                }
+            }else{
+                $obj->$a();
+            }
 
-        //调用控制器方法
-        $obj->$a();
+        }else{  //调用的当前控制器类不存在，则直接实例化空控制器类
+            $obj = new EmptyController();
+            $obj->index();
+        }
+
+
     }
     /**
      * 加载Common目录中，用户自定义的文件
@@ -390,6 +416,25 @@ str;
             foreach ($fileArr as $v) {
                 require_once COMMON_LIB_PATH . DS . $v;
             }
+        }
+    }
+
+    /**
+     * @param $errno
+     * @param $error
+     * @param $file
+     * @param $line
+     */
+    public static function error($errno, $error, $file, $line){
+        switch($errno){
+            case E_STRICT:
+            case E_USER_WARNING:
+            case E_USER_NOTICE:                
+            default:
+                if(DEBUG){
+                    include DATA_PATH . DS . 'Tpl/notice.html';
+                }
+                break;
         }
     }
 

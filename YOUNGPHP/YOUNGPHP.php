@@ -26,6 +26,7 @@ final class YOUNGPHP{
             //引入核心文件整合的单一文件
             require_once(TEMP_PATH . DS .'~boot.php');
         }
+        //调用应用类自动运行函数，加载相关配置文件和类文件
         Application::run();
         //echo "YOUNGPHP";
     }
@@ -54,7 +55,7 @@ final class YOUNGPHP{
         define('CORE_PATH', LIB_PATH . '/Core');
         //框架公共函数目录
         define('FUNCTION_PATH', LIB_PATH . '/Function');
-        //框架扩展目录
+        //框架扩展目录（第三方类库和自身工具类）
         define('EXTENDS_PATH', YOUNGPHP_PATH . DS .'Extends');
         //框架工具类目录
         define('TOOL_PATH', EXTENDS_PATH . DS .'Tool');
