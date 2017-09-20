@@ -126,6 +126,12 @@ function print_const(){
 }
 
 
+function M($table){
+    $obj = new Model($table);
+    return $obj;
+}
+
+
 
 
 

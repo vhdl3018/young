@@ -10,4 +10,9 @@ class EmptyController{
     public function index(){
         echo "I am a good boy!";
     }
+
+
+    public function __empty(){
+        echo "我是不存在的方法";
+    }
 }

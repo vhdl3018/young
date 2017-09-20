@@ -10,8 +10,9 @@ final class Application{
     public static function run(){
         //框架参数相关初始化
         self::_init();
-        //设置用户自定义错误处理函数
+        //设置用户自定义错误处理函数（警告类错误提示）
         set_error_handler(array(__CLASS__, 'error'));
+        register_shutdown_function(array(__CLASS__, 'fatal_error'));
         //加载用户自动定义的文件（Common目录下的文件）
         self::_user_import();
         //初始化框架的url路径
@@ -111,7 +112,6 @@ str;
                 }
                 include $path;
                 break;
-            
             default:
                 $path = TOOL_PATH . DS . $className . '.class.php';
                 if(!is_file($path)) halt($path . '类未找到。');
@@ -203,6 +203,14 @@ str;
      */
     public static function error($errno, $error, $file, $line){
         switch($errno){
+            case E_ERROR:
+            case E_PARSE:
+            case E_CORE_ERROR:
+            case E_COMPILE_ERROR:
+            case E_USER_ERROR:
+                $msg = $error . $file . "第{$line}行";
+                halt($msg);
+                break;
             case E_STRICT:
             case E_USER_WARNING:
             case E_USER_NOTICE:                
@@ -211,6 +219,13 @@ str;
                     include DATA_PATH . DS . 'Tpl/notice.html';
                 }
                 break;
+        }
+    }
+
+    public static function fatal_error(){
+        if($e = error_get_last()){
+            //p($e);
+            self::error($e['type'],$e['message'], $e['file'],$e['line']);
         }
     }
 

@@ -21,6 +21,14 @@ return array(
     'ERROR_RUL'             => '',
     'ERROR_MSG'             => '网站出错了，请稍候再试...',
     //自动加载Common目录下面的文件
-    'AUTO_LOAD_FILE'        => array()
+    'AUTO_LOAD_FILE'        => array(),
+    //数据库参数配置
+    'DB_CHARSET'            => 'utf8',
+    'DB_HOST'               => 'localhost',
+    'DB_PORT'               => 3306,
+    'DB_USER'               => 'root',
+    'DB_PASSWORD'           => '123456',
+    'DB_DATABASE'           => '',
+    'DB_PREFIX'             => ''
 
 );

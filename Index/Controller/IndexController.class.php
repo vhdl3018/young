@@ -2,6 +2,9 @@
 class IndexController extends Controller{
 
     public function index(){
-        include "1.html";
+
+
+        $data =M('user')->field('username')->find();
+        p($data);
     }
 }

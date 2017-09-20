@@ -1,0 +1,17 @@
+[TIME]17-09-20 12:24:17ERROR:syntax error, unexpected '}'D:\wamp\www\young\Index\Controller\IndexController.class.php第6行
+[TIME]17-09-20 12:24:48ERROR:syntax error, unexpected '}'D:\wamp\www\young\Index\Controller\IndexController.class.php第6行
+[TIME]17-09-20 12:25:00ERROR:syntax error, unexpected '}'D:\wamp\www\young\Index\Controller\IndexController.class.php第6行
+[TIME]17-09-20 12:38:05ERROR:Call to undefined function mepty()D:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第22行
+[TIME]17-09-20 12:39:30ERROR:Can't use function return value in write contextD:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第22行
+[TIME]17-09-20 12:40:09ERROR:Call to undefined function eC()D:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第22行
+[TIME]17-09-20 12:40:10ERROR:Call to undefined function eC()D:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第22行
+[TIME]17-09-20 12:40:11ERROR:Call to undefined function eC()D:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第22行
+[TIME]17-09-20 12:40:36ERROR:数据库连接失败，请检查数据库配置项
+[TIME]17-09-20 13:20:16ERROR:Call to undefined method Model::opt()D:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第25行
+[TIME]17-09-20 13:21:06ERROR:mysql错误：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />SQL语句：SELECT * FROeM qx_user
+[TIME]17-09-20 13:42:16ERROR:mysql错误：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />[SQL语句]：SELECT * FROeM qx_user
+[TIME]17-09-20 13:42:36ERROR:[Mysql错误]：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />[SQL语句]：SELECT * FROeM qx_user
+[TIME]17-09-20 13:42:54ERROR:【Mysql错误】：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />【SQL语句】：SELECT * FROeM qx_user
+[TIME]17-09-20 13:44:51ERROR:【Mysql错误】：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />【SQL语句】：SELECT * FROeM qx_user
+[TIME]17-09-20 13:58:04ERROR:【Mysql错误】：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECTusername FROM qx_user' at line 1<br />【SQL语句】：SELECTusername FROM qx_user
+[TIME]17-09-20 14:43:22ERROR:Call to a member function all() on a non-objectD:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第117行
