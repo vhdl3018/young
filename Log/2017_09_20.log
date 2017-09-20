@@ -15,3 +15,6 @@
 [TIME]17-09-20 13:44:51ERROR:【Mysql错误】：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROeM qx_user' at line 1<br />【SQL语句】：SELECT * FROeM qx_user
 [TIME]17-09-20 13:58:04ERROR:【Mysql错误】：You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECTusername FROM qx_user' at line 1<br />【SQL语句】：SELECTusername FROM qx_user
 [TIME]17-09-20 14:43:22ERROR:Call to a member function all() on a non-objectD:\wamp\www\young\YOUNGPHP\Extends\Tool\Model.class.php第117行
+[TIME]17-09-20 15:30:15ERROR:【Mysql语法错误】Table 'tzs.user' doesn't exist<br />【SQL】INSERT INTO user SET username="young111"
+[TIME]17-09-20 15:32:20ERROR:【Mysql语法错误】You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSE1RT INTO qx_user SET username="young111"' at line 1<br />【SQL】INSE1RT INTO qx_user SET username="young111"
+[TIME]17-09-20 15:41:57ERROR:【Mysql语法错误】You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSE1RT INTO qx_user SET username="young111"' at line 1<br />【SQL】INSE1RT INTO qx_user SET username="young111"

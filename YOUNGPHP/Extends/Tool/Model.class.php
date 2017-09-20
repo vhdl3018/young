@@ -124,4 +124,23 @@ class Model {
         return current($data);
     }
 
+    public function exe($sql){
+        self::$sqls[] = $sql;
+        $link = self::$link;
+        $bool = $link->query($sql);
+        $this->_opt();
+
+        if(is_object($bool)){
+            halt("请用query()方法使用sql语句");
+        }
+
+        if($bool){
+            return $link->insert_id ? $link->insert_id : $link->affected_rows;
+            $bool->free();
+        }else{
+            halt('【Mysql语法错误】' . $link->error . '<br />【SQL】' . $sql);
+        }
+
+    }
+
 }
