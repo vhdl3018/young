@@ -125,10 +125,24 @@ function print_const(){
     
 }
 
-
+/**
+ * 自动创建一个模型对象实例
+ * @param $table
+ * @return Model
+ */
 function M($table){
     $obj = new Model($table);
     return $obj;
+}
+
+/**
+ * 自动返回Model扩展类
+ * @param $model
+ * @return mixed
+ */
+function K($model){
+    $model .= "Model";
+    return new $model();
 }
 
 

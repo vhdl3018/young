@@ -112,6 +112,11 @@ str;
                 }
                 include $path;
                 break;
+            //判断当前类是否为Model扩展类
+            case strlen($className)>5 && substr($className, -5) == 'Model' :
+                $path = COMMON_MODEL_PATH . DS . $className .".class.php";
+                include $path;
+                break;
             default:
                 $path = TOOL_PATH . DS . $className . '.class.php';
                 if(!is_file($path)) halt($path . '类未找到。');

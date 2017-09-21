@@ -8,8 +8,8 @@ return array(
     'DB_HOST'               => 'localhost',
     'DB_PORT'               => 3306,
     'DB_USER'               => 'root',
-    'DB_PASSWORD'           => '123456',
-    'DB_DATABASE'           => 'tzs',
-    'DB_PREFIX'             => 'qx_'
+    'DB_PASSWORD'           => '',
+    'DB_DATABASE'           => 'tutor',
+    'DB_PREFIX'             => ''
 );
 ?>

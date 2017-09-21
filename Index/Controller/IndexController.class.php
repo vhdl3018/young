@@ -2,9 +2,8 @@
 class IndexController extends Controller{
 
     public function index(){
-
-
-        $data =M('user')->exe('INSE1RT INTO qx_user SET username="young111"');
+        //$stu = new StudentModel();
+        $data = K('student')->get_all_data();
         p($data);
     }
 }

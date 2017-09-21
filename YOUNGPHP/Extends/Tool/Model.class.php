@@ -95,7 +95,7 @@ class Model {
      * @return $this
      */
     public function where($where){
-        $this->opt['where'] = " WHERE " . $where;
+        $this->opt['where'] = " WHERE " . $this->_safe_str($where);
         return $this;
     }
 
@@ -124,6 +124,11 @@ class Model {
         return current($data);
     }
 
+    /**
+     * 执行非返回资源的sql函数
+     * @param $sql
+     * @return mixed
+     */
     public function exe($sql){
         self::$sqls[] = $sql;
         $link = self::$link;
@@ -143,4 +148,79 @@ class Model {
 
     }
 
+    /**
+     * 删除指定条件的数据
+     * @return mixed
+     */
+    public function delete(){
+        if(empty($this->opt['where'])) halt('执行删除语句，必须有where条件！');
+        $sql = "DELETE FROM " . $this->table . $this->opt['where'];
+        return $this->exe($sql);
+    }
+
+    /**
+     * 对数据进行转义
+     * @param $str
+     * @return mixed
+     */
+    private function _safe_str($str){
+        if(get_magic_quotes_gpc()){
+            $str = stripslashes($str);
+        }
+
+        return self::$link->real_escape_string($str);
+            
+    }
+
+    /**
+     * 添加数据
+     * @param null $data
+     * @return mixed
+     */
+    public function add($data=null){
+        //判断data数据是否为空，为空则直接取POST值
+        if(is_null($data)) $data = $_POST;
+        $fields = '';
+        $values = '';
+        //insert into admin( username,passwd) values ('adad','111111');
+        //按照INSERT INTO语句格式，拼接sql语句
+        foreach ($data as $f => $v){
+            $fields .= "`" . $this->_safe_str($f) . "`" . ",";
+            $values .= "'" . $this->_safe_str($v) . "'" . ",";
+        }
+        $fields = trim($fields, ',');
+        $values = trim($values, ',');
+        $sql = '';
+        $sql = "INSERT INTO " . $this->table . "($fields)" . " VALUES " . "($values)";
+        //执行sql无结果集查询
+        return $this->exe($sql);
+    }
+
+    /**
+     * 修改数据
+     * @param null $data
+     * @return mixed
+     */
+    public function update($data=null){
+        //执行更新语句时，where条件不能为空
+        if(empty($this->opt['where'])) halt("执行update语句，where条件不能空，请重新设置！");
+        //判断data数据是否为空，为空则直接取POST值
+        if(is_null($data)) $data = $_POST;
+        $values = '';
+        //update `admin` set username='usersss',passwd='11111' where id = 4;
+        //按照INSERT INTO语句格式，拼接sql语句
+        foreach ($data as $f => $v){
+            $values .= "`" . $this->_safe_str($f) . "`" . "='" . $this->_safe_str($v) . "',";
+        }
+        $values = trim($values, ',');
+        $sql = '';
+        $sql = "UPDATE " . $this->table . " SET " . $values . $this->opt['where'];
+        return $this->exe($sql);
+    }
+    
+    
+    
+    
+    
+    
 }
