@@ -29,6 +29,12 @@ return array(
     'DB_USER'               => 'root',
     'DB_PASSWORD'           => '123456',
     'DB_DATABASE'           => '',
-    'DB_PREFIX'             => ''
+    'DB_PREFIX'             => '',
+    //Smarty配置荐
+    'SMARTY_ON'             =>true,
+    'LEFT_DELIMITER'        =>'{Yp',
+    'RIGHT_DELIMITER'       =>'}',
+    'CACHE_ON'              =>false,
+    'CACHE_TIME'            =>60
 
 );

@@ -4,3 +4,7 @@
 [TIME]17-09-21 20:29:42ERROR:执行update语句，where条件不能空，请重新设置！
 [TIME]17-09-21 20:30:21ERROR:【Mysql语法错误】You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE id=3' at line 1<br />【SQL】UPDATE admin SET username='3123',passwd='3123' WHERE  WHERE id=3
 [TIME]17-09-21 20:54:29ERROR:D:/wamp64/www/young/YOUNGPHP\Extends\Tool\StudentModel.class.php类未找到。
+[TIME]17-09-21 23:09:17ERROR:Uncaught  --> Smarty: 1():Missing '$template' parameter <-- 
+  thrownD:\wamp64\www\young\YOUNGPHP\Extends\Org\Smarty\sysplugins\smarty_internal_templatebase.php第154行
+[TIME]17-09-21 23:09:50ERROR:Uncaught  --> Smarty: 1():Missing '$template' parameter <-- 
+  thrownD:\wamp64\www\young\YOUNGPHP\Extends\Org\Smarty\sysplugins\smarty_internal_templatebase.php第154行

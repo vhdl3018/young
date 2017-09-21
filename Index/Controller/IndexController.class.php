@@ -2,8 +2,7 @@
 class IndexController extends Controller{
 
     public function index(){
-        //$stu = new StudentModel();
-        $data = K('student')->get_all_data();
-        p($data);
+        $this->assign('var',"我是一个模板数值，请注意查收 。");
+        $this->display();
     }
 }

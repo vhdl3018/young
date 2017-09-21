@@ -9,9 +9,12 @@
 /**
  * Class Controller  控制器父类
  */
-class Controller{
+class Controller extends SmartyView{
     protected $var = array();
     public function __construct(){
+        if (C('SMARTY_ON')){
+            parent::__construct();
+        }
         //echo "父类本身的初始化过程";
         //给父类增加一个本类的初始化方法
         if(method_exists($this, '__init')){
@@ -49,6 +52,25 @@ class Controller{
      * @param null $tpl
      */
     protected function display($tpl=null){
+        //获取当前模板的路径
+        $path = $this->get_tpl($tpl);
+        if (!is_file($path)) halt($path . "模板文件不存在！") ;
+        if (C('SMARTY_ON')){
+            parent::display($path);
+        }else{
+            //将模板数组数据，分解成关联数组对的变量和值。
+            extract($this->var);
+            //载入当前模板文件
+            include $path;
+        }
+    }
+
+    /**
+     * 获取当前模板路径
+     * @param $tpl
+     * @return string
+     */
+    protected function get_tpl($tpl){
         //默认自动载入当前操作方法对应的模板
         if(is_null($tpl)){
             //如果为空，则自动加载当前应用模板目录中对应的方法名模板
@@ -58,12 +80,7 @@ class Controller{
             $tpl = empty($suffix) ? $tpl.'.html' : $tpl;
             $path = APP_TPL_PATH . DS . CONTROLLER . DS . $tpl;
         }
-
-        if (!is_file($path)) halt($path . "模板文件不存在！") ;
-        //将模板数组数据，分解成关联数组对的变量和值。
-        extract($this->var);
-        //载入当前模板文件
-        include $path;
+        return $path;
     }
 
     /**
@@ -72,8 +89,14 @@ class Controller{
      * @param $value
      */
     protected function assign($var, $value){
-        $this->var[$var] = $value;
+        if (C('SMARTY_ON')){
+            parent::assign($var, $value);
+        }else{
+            $this->var[$var] = $value;
+        }
     }
+    
+
 
 }
 

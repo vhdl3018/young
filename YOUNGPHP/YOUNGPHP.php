@@ -62,8 +62,6 @@ final class YOUNGPHP{
         //框架外包目录
         define('ORG_PATH', EXTENDS_PATH . DS .'org');
 
-
-
         //项目根目录
         define('ROOT_PATH', dirname(YOUNGPHP_PATH));
         //临时目录
@@ -77,6 +75,11 @@ final class YOUNGPHP{
         define('APP_CONTROLLER_PATH', APP_PATH . DS .'Controller');
         define('APP_TPL_PATH', APP_PATH . DS .'Tpl');
         define('APP_PUBLIC_PATH', APP_TPL_PATH . DS .'Public');
+
+        //Smarty相关目录路径
+        define('APP_COMPILE_PATH', TEMP_PATH . DS . APP_NAME . DS . 'Compile');
+        define('APP_CACHE_PATH', TEMP_PATH . DS . APP_NAME . DS . 'Cache');
+
 
         //创建公共
         define('COMMON_PATH', ROOT_PATH . DS . 'Common');
@@ -114,6 +117,8 @@ final class YOUNGPHP{
             APP_TPL_PATH,
             APP_PUBLIC_PATH,
             TEMP_PATH,
+            APP_COMPILE_PATH,
+            APP_CACHE_PATH,
             LOG_PATH
         );
         //循环创建目录
@@ -140,6 +145,9 @@ final class YOUNGPHP{
         $fileArr = array(
             CORE_PATH . DS .'Log.class.php',
             FUNCTION_PATH . DS .'function.php',
+            //引入Smarty模板引擎
+            ORG_PATH . DS . 'Smarty/Smarty.class.php',
+            CORE_PATH . DS .'SmartyView.class.php',
             CORE_PATH . DS .'Controller.class.php',
             CORE_PATH . DS . 'Application.php'
         );
