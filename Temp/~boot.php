@@ -1723,13 +1723,33 @@ class SmartyView{
         self::$smarty = $smarty;
 
     }
-    
+
+    /**
+     * 调用Smarty类的显示方法。
+     * @param null $tpl
+     */
     protected function display($tpl = null){
         self::$smarty->display($tpl, $_SERVER['REQUEST_URI']);
     }
+
+    /**
+     * 调用Smarty类的，分配数值方法。
+     * @param $var
+     * @param $value
+     */
     protected function assign($var, $value){
         self::$smarty->assign($var, $value);
+    }
 
+    /**
+     * 设置模板缓存的失效时间
+     * @param null $tpl
+     * @return mixed
+     */
+    protected function is_cached($tpl=null){
+        if(!C('SMARTY_ON')) halt("请先开户Smarty");
+        $tpl = $this->get_tpl($tpl);
+        return self::is_cached($tpl, $_SERVER['REQUEST_URI']);
     }/**
  * Created by PhpStorm.
  * User: qsqxj
@@ -1841,6 +1861,7 @@ final class Application{
         self::_init();
         //设置用户自定义错误处理函数（警告类错误提示）
         set_error_handler(array(__CLASS__, 'error'));
+        //设置用户自定义错误处理函数(致命错误粉错误提示)
         register_shutdown_function(array(__CLASS__, 'fatal_error'));
         //加载用户自动定义的文件（Common目录下的文件）
         self::_user_import();
@@ -2056,6 +2077,9 @@ str;
         }
     }
 
+    /**
+     * 用户自定义错误处理函数
+     */
     public static function fatal_error(){
         if($e = error_get_last()){
             //p($e);

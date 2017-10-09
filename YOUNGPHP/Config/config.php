@@ -7,7 +7,17 @@
  */
 
 return array(
-    'CODE_LEN'              => 4,
+    //验证码参数
+    'CODE' =>  array(
+        'code'                 => '',
+        'codeLen'              => 4,
+        'codeWidth'            => 70,
+        'codeHeight'           => 40,
+        'codeType'             => 1,       //0----纯数字，1----纯字母，2----数字与字母混合。
+        'codeStr'              =>'abcdefghjkmnpqrstuvwsyz23456789',
+        'codeBg'               =>'#000000'
+    ),
+    //默认时区
     'DEFAULT_TIME_ZONE'     => 'PRC',
     //是否开启SESSION功能
     'SESSION_AUTO_START'    => TRUE,
@@ -30,7 +40,7 @@ return array(
     'DB_PASSWORD'           => '123456',
     'DB_DATABASE'           => '',
     'DB_PREFIX'             => '',
-    //Smarty配置荐
+    //Smarty配置项
     'SMARTY_ON'             =>true,
     'LEFT_DELIMITER'        =>'{Yp',
     'RIGHT_DELIMITER'       =>'}',

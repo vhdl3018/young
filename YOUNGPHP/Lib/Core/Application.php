@@ -12,6 +12,7 @@ final class Application{
         self::_init();
         //设置用户自定义错误处理函数（警告类错误提示）
         set_error_handler(array(__CLASS__, 'error'));
+        //设置用户自定义错误处理函数(致命错误粉错误提示)
         register_shutdown_function(array(__CLASS__, 'fatal_error'));
         //加载用户自动定义的文件（Common目录下的文件）
         self::_user_import();
@@ -227,6 +228,9 @@ str;
         }
     }
 
+    /**
+     * 用户自定义错误处理函数
+     */
     public static function fatal_error(){
         if($e = error_get_last()){
             //p($e);

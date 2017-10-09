@@ -143,11 +143,13 @@ final class YOUNGPHP{
      */
     private static function _import_file(){
         $fileArr = array(
+            //引入日志类和公共函数文件
             CORE_PATH . DS .'Log.class.php',
             FUNCTION_PATH . DS .'function.php',
             //引入Smarty模板引擎
             ORG_PATH . DS . 'Smarty/Smarty.class.php',
             CORE_PATH . DS .'SmartyView.class.php',
+            //引入应用初始化类和控制器类
             CORE_PATH . DS .'Controller.class.php',
             CORE_PATH . DS . 'Application.php'
         );

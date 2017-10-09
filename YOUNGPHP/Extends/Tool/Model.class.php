@@ -39,7 +39,7 @@ class Model {
     }
 
     /**
-     *
+     *  配置数据库类相关操作属性
      */
     private function _opt(){
         $this->opt = array(

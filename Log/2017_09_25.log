@@ -1,0 +1,9 @@
+[TIME]17-09-25 21:05:27ERROR:Constructor Code::code() cannot be staticD:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第35行
+[TIME]17-09-25 22:03:11ERROR:syntax error, unexpected ')'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第35行
+[TIME]17-09-25 22:03:12ERROR:syntax error, unexpected ')'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第35行
+[TIME]17-09-25 22:11:24ERROR:syntax error, unexpected 'public' (T_PUBLIC), expecting ',' or ';'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第23行
+[TIME]17-09-25 22:11:41ERROR:syntax error, unexpected 'public' (T_PUBLIC), expecting ',' or ';'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第23行
+[TIME]17-09-25 22:16:29ERROR:syntax error, unexpected ';'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第44行
+[TIME]17-09-25 22:16:58ERROR:Call to undefined function strlenstrlen()D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第44行
+[TIME]17-09-25 22:17:00ERROR:Call to undefined function strlenstrlen()D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第44行
+[TIME]17-09-25 23:01:33ERROR:syntax error, unexpected 'l' (T_STRING), expecting ',' or ';'D:\wamp64\www\young\YOUNGPHP\Extends\Tool\Code.class.php第43行
